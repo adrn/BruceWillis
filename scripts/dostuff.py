@@ -39,10 +39,10 @@ nmcmc_steps = 128
 cache_nsteps = 16
 
 def ln_posterior(p, coordinate, obs_vlos, err_vlos):
-    pm_l,pm_b,vlos = p
+    pm_ra,pm_dec,vlos = p
 
     vgal = gc.vhel_to_gal(coordinate,
-                          pm=(pm_l*u.mas/u.yr,pm_b*u.mas/u.yr),
+                          pm=(pm_ra*u.mas/u.yr,pm_dec*u.mas/u.yr),
                           rv=vlos*u.km/u.s,
                           vcirc=vcirc, vlsr=vlsr, galactocentric_frame=gc_frame)
     vtot = np.sqrt(np.sum(vgal**2)).to(u.km/u.s).value
@@ -72,7 +72,7 @@ def main(mpi=False):
     cache = np.memmap(cache_file, dtype=cache_dtype, mode='r+', shape=cache_shape)
 
     # coordinate object and error in distance
-    c = coord.SkyCoord(l=tbl['GLON'], b=tbl['GLAT'], distance=tbl['d'], frame='galactic')
+    c = coord.ICRS(ra=tbl['RAdeg'], dec=tbl['DEdeg'], distance=tbl['d'])
     err_dist = u.Quantity(tbl['d']*0.1)
 
     # heliocentric line-of-sight velocity
