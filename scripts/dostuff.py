@@ -91,7 +91,7 @@ def main(mpi=False):
             continue
 
         logger.debug("Running MCMC sampling...")
-        args = (c[i],obs_vlos[i],err_vlos)
+        args = (c[i],obs_vlos[i],err_vlos[i])
         sampler = emcee.EnsembleSampler(nwalkers=nwalkers, dim=3, args=args,
                                         lnpostfn=ln_posterior, pool=pool)
 
