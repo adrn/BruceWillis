@@ -30,10 +30,10 @@ gc_frame = coord.Galactocentric(galcen_distance=8.3*u.kpc)
 sigma_halo = 200. # km/s
 
 # HACK: hard set
-# nwalkers = 64
-# nmcmc_steps = 128
-nwalkers = 16
-nmcmc_steps = 16
+nwalkers = 64
+nmcmc_steps = 128
+# nwalkers = 16
+# nmcmc_steps = 16
 
 # HACK: hard set
 cache_nsteps = 16
